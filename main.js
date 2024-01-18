@@ -2,7 +2,6 @@ function getComputerChoice() {
 
     const choices = ["rock", "paper", "scissors"]
     let choice = choices[Math.floor(Math.random() * 3)]
-    console.log(`Computer chose ${choice}!`)
 
     return choice
 
@@ -11,7 +10,7 @@ function getComputerChoice() {
 function getPlayerChoice() {
 
     let choice;
-    const choices = ["rock", "paper", "scissors"]
+    const choices = ["rock", "paper", "scissors", "quit"]
 
     while (!choices.includes(choice)) {
         choice = prompt("Rock, paper or scissors?")
@@ -54,6 +53,9 @@ function playRound(playerSelection, computerSelection) {
             return "You win! Scissors beats paper."
         }
     }
+    else if(playerChoice == "quit") {
+        return "quit"
+    }
     else {
         return "error"
     }
@@ -93,6 +95,9 @@ function game() {
 
     if (result == "error") {
         console.log("something went wrong!")
+        break;
+    } else if (result == "quit") {
+        console.log("Quiting game...")
         break;
     }
     else {
