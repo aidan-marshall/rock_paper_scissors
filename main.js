@@ -1,18 +1,23 @@
 function getComputerChoice() {
 
     const choices = ["rock", "paper", "scissors"]
+    let choice = choices[Math.floor(Math.random() * 3)]
+    console.log(`Computer chose ${choice}!`)
 
-    return choices[Math.floor(Math.random() * 3)]
+    return choice
 
 }
 
 function getPlayerChoice() {
 
-    let choice = ''
+    let choice;
     const choices = ["rock", "paper", "scissors"]
 
     while (!choices.includes(choice)) {
         choice = prompt("Rock, paper or scissors?")
+        if (!choices.includes(choice)) {
+        console.log("Invalid choice... please select rock, paper or scissors.")
+    }
     }
     console.log(`You chose ${choice}!`)
     return choice;
@@ -50,7 +55,7 @@ function playRound(playerSelection, computerSelection) {
         }
     }
     else {
-        return "ERROR"
+        return "error"
     }
 
 }
@@ -77,13 +82,16 @@ function game() {
 
     let result = playRound(playerChoice, computerChoice);
 
-    while (result == "TIE") {
+    if (result == "tie") {
+        console.log("TIE... restarting round")
+        while (result == "tie") {
         computerChoice = getComputerChoice();
         playerChoice = getPlayerChoice();
         result = playRound(playerChoice, computerChoice)
     }
+    }
 
-    if (result == "ERROR") {
+    if (result == "error") {
         console.log("something went wrong!")
         break;
     }
@@ -99,8 +107,4 @@ function game() {
     console.log(`Round over!\tComputer score: ${computerScore}\tPlayer score: ${playerScore}`)
 
     }
-
-
 }
-
-game();
